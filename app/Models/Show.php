@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Artist extends Model
+class Show extends Model
 {
     use HasFactory;
 
@@ -16,18 +16,17 @@ class Artist extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'firstName',
-        'lastName',
-        'nickName',
+        'label',
         'comment',
+        'duration',
     ];
 
     /**
      * The relationship between show with artist
      * 
      */
-    public function show(): BelongsToMany
+    public function artists(): BelongsToMany
     {
-        return $this->belongsToMany(Show::class);
+        return $this->belongsToMany(Artist::class);
     }
 }
