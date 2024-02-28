@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('label');
-            $table->text('comment');
+            $table->text('comment')->nullable();
             $table->date('date');
             $table->time('time');
             $table->decimal('generalNote', $precision = 3, $scale = 2);
             $table->smallInteger('numberPlaces');
             $table->smallInteger('numberPlacesReserved');
             $table->boolean('is_open');
+            $table->foreignId('show_id')->constrained()->nullable();
             $table->timestamps();
         });
     }

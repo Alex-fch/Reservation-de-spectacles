@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Show;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Nette\Utils\Random;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Event>
@@ -18,6 +20,7 @@ class EventFactory extends Factory
     {
         $numberPlaces = fake()->randomNumber($nbDigits = 3, $strict = true);
         $numberPlacesReserved = fake()->numberBetween(0, $numberPlaces);
+        $shows = Show::get();
 
         return [
             'label' => fake()->sentence($nbWords = 3, $variableNbWords = true),
@@ -28,7 +31,7 @@ class EventFactory extends Factory
             'numberPlaces' => $numberPlaces,
             'numberPlacesReserved' => $numberPlacesReserved,
             'is_open' => true,
-
+            'show_id' => $shows->random()->id,
         ];
     }
 }
