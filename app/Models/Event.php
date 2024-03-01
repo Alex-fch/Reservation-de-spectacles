@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Staudenmeir\EloquentEagerLimit\HasEagerLimit;
 
 class Event extends Model
 {
-    use HasFactory;
+    use HasFactory, HasEagerLimit;
 
     /**
      * The attributes that are mass assignable.
@@ -19,11 +20,10 @@ class Event extends Model
     protected $fillable = [
         'label',
         'comment',
-        'date',
-        'time',
         'generalNote',
         'numberPlaces',
         'numberReservedPlaces',
+        'urlImage',
         'is_open',
     ];
 
@@ -40,7 +40,7 @@ class Event extends Model
      * The relationship between event with show
      * 
      */
-    public function shows(): BelongsTo
+    public function show(): BelongsTo
     {
         return $this->belongsTo(Show::class);
     }
@@ -61,5 +61,14 @@ class Event extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    /**
+     * The relationship between concertHall with event
+     * 
+     */
+    public function concertHalls(): BelongsToMany
+    {
+        return $this->belongsToMany(ConcertHall::class);
     }
 }

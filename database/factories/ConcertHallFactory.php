@@ -18,16 +18,18 @@ class ConcertHallFactory extends Factory
      */
     public function definition(): array
     {
-        $cities = City::get();
-        $countries = Country::get();
+        //$cities = City::get();
+        //$countries = Country::get();
 
         return [
             'name' => fake()->title(),
             'comment' => fake()->optional()->text(100),
             'numberPlaces' => fake()->numberBetween(100, 5000),
+            'date' => fake()->dateTimeBetween('now', '+1 year'),
+            'time' => fake()->time('H:i'),
             'adress_street' => fake()->streetName(),
-            'country_id' => $countries->random()->id,
-            'city_id' => $cities->random()->id,
+            'country_id' => Country::factory(), //$countries->random()->id,
+            'city_id' => City::factory() // $cities->random()->id,
         ];
     }
 }

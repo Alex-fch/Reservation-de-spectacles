@@ -15,12 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('label');
             $table->text('comment')->nullable();
-            $table->date('date');
-            $table->time('time');
             $table->decimal('generalNote', $precision = 3, $scale = 2);
             $table->smallInteger('numberPlaces');
             $table->smallInteger('numberPlacesReserved');
             $table->boolean('is_open');
+            $table->string('urlImage', 255);
             $table->foreignId('show_id')->constrained()->nullable();
             $table->timestamps();
         });

@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Event;
+use App\Models\ConcertHall;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class EventController extends Controller
 {
@@ -12,7 +17,11 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::with(['concertHalls' => fn ($q) => $q->orderByDesc('date')->limit(1), 'concertHalls.city'])->get();
+
+        return Inertia::render('Home/home', [
+            'events' => $events,
+        ]);
     }
 
     /**
@@ -36,7 +45,11 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        $detailEvent = Event::with(['concertHalls' => fn ($q) => $q->orderByDesc('date')->limit(1), 'concertHalls.city'])->find($event->id);
+
+        return Inertia::render('Home/edit', [
+            'event' => $detailEvent,
+        ]);
     }
 
     /**

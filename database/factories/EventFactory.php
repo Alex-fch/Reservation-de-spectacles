@@ -25,12 +25,11 @@ class EventFactory extends Factory
         return [
             'label' => fake()->sentence($nbWords = 3, $variableNbWords = true),
             'comment' => fake()->text(100),
-            'date' => fake()->dateTimeBetween('now', '+1 year'),
-            'time' => fake()->time('H:i'),
             'generalNote' => fake()->randomFloat($nbMaxDecimals = 1, $min = 1, $max = 5),
             'numberPlaces' => $numberPlaces,
             'numberPlacesReserved' => $numberPlacesReserved,
             'is_open' => true,
+            'urlImage' => fake()->imageUrl($width = 640, $height = 480, 'lorempixel/landscape'),
             'show_id' => $shows->random()->id,
         ];
     }

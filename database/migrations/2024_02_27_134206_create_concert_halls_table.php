@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->smallInteger('numberPlaces');
             $table->text('comment')->nullable();
+            $table->date('date');
+            $table->time('time');
             $table->string('adress_street');
             $table->foreignId('country_id')->constrained()->nullable();
             $table->foreignId('city_id')->constrained()->nullable();

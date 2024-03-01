@@ -15,6 +15,7 @@ class EventSeeder extends Seeder
      */
     public function run(): void
     {
+
         $categories = Category::get();
         $tags = Tag::get();
 
