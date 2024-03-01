@@ -26,7 +26,7 @@ class Artist extends Model
      * The relationship between show with artist
      * 
      */
-    public function show(): BelongsToMany
+    public function shows(): BelongsToMany
     {
         return $this->belongsToMany(Show::class);
     }

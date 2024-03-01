@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Staudenmeir\EloquentEagerLimit\HasEagerLimit;
 
 class ConcertHall extends Model
 {
-    use HasFactory;
+    use HasFactory, HasEagerLimit;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +21,7 @@ class ConcertHall extends Model
         'name',
         'numberPlaces',
         'comment',
+        'date',
         'time',
         'adress_street',
     ];
@@ -37,7 +39,7 @@ class ConcertHall extends Model
      * The relationship between concertHall with country
      * 
      */
-    public function countries(): BelongsTo
+    public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class);
     }
@@ -46,7 +48,7 @@ class ConcertHall extends Model
      * The relationship between concertHall with country
      * 
      */
-    public function cities(): BelongsTo
+    public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
     }
